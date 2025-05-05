@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parent Page with Iframe</title>
+</head>
+<body>
+<h2>Parent Page</h2>
+<div id="showMessage">Hi Modives</div>
+<iframe id="myIframe"src="https://modives-web-develop4.azurewebsites.net/newconsumer-verification/3a19b303-092f-f718-8d36-3e181327d4aa?clientId=e0f3c9f0-73d7-4bc3-88ca-58994c33892f" width="600" height="800" style="border:1px solid black;"></iframe>
+<script>
+    window.addEventListener("message", (event) => {
+    // You can add origin check here for safety
+    // console.log(window.location.href)
+    console.log(event)
+    if (event.data?.type === "modivesResponse") {
+      console.log("Received message from iframe:", event.data);
+      console.log("Received message from Origin:", event.origin);
+ 
+      document.getElementById("showMessage").innerHTML = JSON.stringify(event.data);
+    //   document.getElementById("myIframe").style.display = "none";
+    }
+  });
+</script>
+</body>
+</html> 
